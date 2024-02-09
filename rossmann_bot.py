@@ -5,20 +5,7 @@ import os
 from flask import Flask, request, Response
 
 #constants
-TOKEN = '6713345458:AAGlvOV4DRuyxg21mai2z5HZUGykC1w8Hww'
-
-# # Info about the bot
-# https://api.telegram.org/bot6713345458:AAGlvOV4DRuyxg21mai2z5HZUGykC1w8Hww/getMe
-
-# # Get Updates
-# https://api.telegram.org/bot6713345458:AAGlvOV4DRuyxg21mai2z5HZUGykC1w8Hww/getUpdates
-
-# # Webhook
-# https://api.telegram.org/bot6713345458:AAGlvOV4DRuyxg21mai2z5HZUGykC1w8Hww/setWebhook?url=https://https://b14f14c66feb16.lhr.life/
-
-# # send messages
-# https://api.telegram.org/bot6713345458:AAGlvOV4DRuyxg21mai2z5HZUGykC1w8Hww/sendMessage?chat_id=1399408599&text=hi, juliano, iam good.
-
+TOKEN = os.environ.get('TOKEN')
 
 def send_message( chat_id, text ):
     # send message
