@@ -34,10 +34,10 @@ def send_message (chat_id, text):
     
 def load_dataset( store_id):
     #loading test dataset
-    home_path = os.path.abspath('.')
-    df10 = pd.read_csv(os.path.join(home_path, 'dataset', 'test.csv'))
+    # home_path = os.path.abspath('.')
+    df10 = pd.read_csv('test.csv')
 
-    df_store_raw = pd.read_csv(os.path.join(home_path, 'dataset', 'store.csv'))
+    df_store_raw = pd.read_csv('store.csv')
     
     #merge test dataset + store
     df_test = pd.merge(df10, df_store_raw, how='left', on='Store' )
@@ -107,16 +107,20 @@ def index():
                 d1 = predict(data)
                 #calculation
                 d2 = d1[['store', 'prediction']].groupby( 'store' ).sum().reset_index()
+                
+                
+                #send message
                 msg = ( 'Store Number {} will sell R${:,.2f} in the next 6 weeks'.format(
                     d2.loc['store'].values[0],
                     d2.loc['prediction'].values[0] ) )
-                
-                #send message
                 send_message(chat_id, msg)
+                
                 return Response('Ok', status=200)
+            
             else:
                 send_message(chat_id, 'Store not Available')
                 return Response('Ok', status=200)
+            
         else:        
             send_message(chat_id, 'Store ID is Wrong!')
             return Response('Ok', status=200)
